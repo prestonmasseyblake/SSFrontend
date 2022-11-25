@@ -1,3 +1,17 @@
 .swipe-container {
     z-index: 100;
 }
+
+.tinder-card {
+    height: 300px;
+}
+
+.swiper-card {
+    height: 400px;
+    min-height: 400px;
+}
+
+.cardContainer {
+    position: relative;
+    height: 400px;
+}

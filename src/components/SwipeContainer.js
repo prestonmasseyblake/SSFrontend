@@ -1,6 +1,9 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import TinderCard from "react-tinder-card";
 import "./SwipeContainer.css"
+
+
+
 const db = [
   {
     name: "Richard Hendricks",
@@ -24,15 +27,28 @@ const db = [
   },
 ];
 
-function SwipeContainer() {
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1);
+function parseCategories(categoryText) {
+  let arr = []
+  for (let i = 0; i < categoryText.length; i++) {
+    
+  }
+
+}
+
+const SwipeContainer = ({ products }) => {
+  const [currentIndex, setCurrentIndex] = useState(products.length - 1);
   const [lastDirection, setLastDirection] = useState();
+  
+  useEffect(() => {
+    console.log("products",products)
+  },[])
+  
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(products.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -43,7 +59,7 @@ function SwipeContainer() {
     currentIndexRef.current = val;
   };
 
-  const canGoBack = currentIndex < db.length - 1;
+  const canGoBack = currentIndex < products.length - 1;
 
   const canSwipe = currentIndex >= 0;
 
@@ -63,7 +79,7 @@ function SwipeContainer() {
   };
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < products.length) {
       await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
     }
   };
@@ -76,58 +92,67 @@ function SwipeContainer() {
     await childRefs[newIndex].current.restoreCard();
   };
 
-    return (
-      <div>
-        <div className="swipe-container  flex flex-col justify-center items-center">
-          <link
-            href="https://fonts.googleapis.com/css?family=Damion&display=swap"
-            rel="stylesheet"
-          />
-          <link
-            href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
-            rel="stylesheet"
-          />
-          <h1 class="text-6xl mb-8">Santa Swiper</h1>
-          <div className="cardContainer flex justify-center bg-[#FFF]">
-            {db.map((character, index) => (
-              <TinderCard
-                ref={childRefs[index]}
-                className="swipe"
-                key={character.name}
-                onSwipe={(dir) => swiped(dir, character.name, index)}
-                onCardLeftScreen={() => outOfFrame(character.name, index)}
-              >
-                <div className="bg-[#FFF]">
-                  <div
-                    style={{ backgroundImage: "url(" + character.url + ")" }}
-                    className="card"
-                  ></div>
-                  <h3>{character.name}</h3>
+  return (
+    <div>
+      <div className="swipe-container  flex flex-col justify-center items-center">
+        <link
+          href="https://fonts.googleapis.com/css?family=Damion&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
+          rel="stylesheet"
+        />
+        <h1 class="text-6xl mb-8">Santa Swiper</h1>
+        <div className="cardContainer flex justify-center max-w-xs rounded-lg bg-[#333]">
+          {products.map((character, index) => (
+            <TinderCard
+              ref={childRefs[index]}
+              className="swipe tinder-card flex flex-col items-center max-w-xs rounded-lg"
+              key={character.name}
+              onSwipe={(dir) => swiped(dir, character.name, index)}
+              onCardLeftScreen={() => outOfFrame(character.name, index)}
+            >
+              <div className="bg-[#FFF] flex flex-col  items-center swiper-card text-left ">
+                <div
+                  style={{ backgroundImage: "url(" + character.image + ")" }}
+                  className="card"
+                ></div>
+                <div className="p-2">
+                  <h3 className="font-bold">{character.name}</h3>
+                  <div className="">
+                    <p>{character.category}</p>
+                    <h3 className="">price: ${character.price}</h3>
+                  </div>
                 </div>
-              </TinderCard>
-            ))}
-          </div>
-          <div className="buttons">
-            <button
-              style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-              onClick={() => swipe("left")}
-            >
-              Dislike
-            </button>
-            <button
-              style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
-              onClick={() => goBack()}
-            >
-              Undo
-            </button>
-            <button
-              style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
-              onClick={() => swipe("right")}
-            >
-              Like
-            </button>
-          </div>
-          {/* {lastDirection ? (
+              </div>
+            </TinderCard>
+          ))}
+        </div>
+        <div className="buttons">
+          <button
+            className="bg-red-400"
+            style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+            onClick={() => swipe("left")}
+          >
+            Dislike
+          </button>
+          <button
+            className="bg-[#333]"
+            style={{ backgroundColor: !canGoBack && "#c3c4d3" }}
+            onClick={() => goBack()}
+          >
+            Undo
+          </button>
+          <button
+            className="bg-green-400"
+            style={{ backgroundColor: !canSwipe && "#c3c4d3" }}
+            onClick={() => swipe("right")}
+          >
+            Like
+          </button>
+        </div>
+        {/* {lastDirection ? (
         <h2 key={lastDirection} className="infoText">
           You swiped {lastDirection}
         </h2>
@@ -136,9 +161,9 @@ function SwipeContainer() {
           Swipe a card or press a button to get Restore Card button visible!
         </h2>
       )} */}
-        </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default SwipeContainer;
