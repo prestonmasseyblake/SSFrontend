@@ -2,47 +2,22 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import TinderCard from "react-tinder-card";
 import "./SwipeContainer.css"
 
-
-
-const db = [
-  {
-    name: "Richard Hendricks",
-    url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-012021-best-hair-products-1642523366.png?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",
-  },
-  {
-    name: "Erlich Bachman",
-    url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-012021-best-hair-products-1642523366.png?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",
-  },
-  {
-    name: "Monica Hall",
-    url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-012021-best-hair-products-1642523366.png?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",
-  },
-  {
-    name: "Jared Dunn",
-    url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-012021-best-hair-products-1642523366.png?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",
-  },
-  {
-    name: "Dinesh Chugtai",
-    url: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gh-012021-best-hair-products-1642523366.png?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",
-  },
-];
-
 function parseCategories(categoryText) {
   let arr = []
   for (let i = 0; i < categoryText.length; i++) {
-    
-  }
 
+  }
 }
 
-const SwipeContainer = ({ products }) => {
+const SwipeContainer = ({ products, cartItems, setCartItems }) => {
   const [currentIndex, setCurrentIndex] = useState(products.length - 1);
   const [lastDirection, setLastDirection] = useState();
-  
+
   useEffect(() => {
-    console.log("products",products)
-  },[])
-  
+    // console.log("products", products);
+    console.log(cartItems);
+  }, []);
+
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
 
@@ -53,6 +28,13 @@ const SwipeContainer = ({ products }) => {
         .map((i) => React.createRef()),
     []
   );
+
+  const swipedRight = (index) => {
+    // setCartItems(["fwg"]);
+    setCartItems(cartItems.concat(products[index ]));
+    // console.log("cartItems ... ", cartItems)
+    console.log("cccc ",products[index ]);
+  }
 
   const updateCurrentIndex = (val) => {
     setCurrentIndex(val);
@@ -67,6 +49,10 @@ const SwipeContainer = ({ products }) => {
   const swiped = (direction, nameToDelete, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
+    console.log("direction ", direction)
+    if (direction === "right") {
+      swipedRight(index)
+    }
   };
 
   const outOfFrame = (name, idx) => {
@@ -108,12 +94,12 @@ const SwipeContainer = ({ products }) => {
           {products.map((character, index) => (
             <TinderCard
               ref={childRefs[index]}
-              className="swipe tinder-card flex flex-col items-center max-w-xs rounded-lg"
+              className="swipe tinder-card flex flex-col rounded-md items-center max-w-xs rounded-lg"
               key={character.name}
               onSwipe={(dir) => swiped(dir, character.name, index)}
               onCardLeftScreen={() => outOfFrame(character.name, index)}
             >
-              <div className="bg-[#FFF] flex flex-col  items-center swiper-card text-left ">
+              <div className="bg-[#FFF] flex flex-col   items-center swiper-card text-left ">
                 <div
                   style={{ backgroundImage: "url(" + character.image + ")" }}
                   className="card"
@@ -164,6 +150,6 @@ const SwipeContainer = ({ products }) => {
       </div>
     </div>
   );
-}
+};
 
 export default SwipeContainer;
