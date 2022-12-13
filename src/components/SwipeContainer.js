@@ -89,7 +89,7 @@ const SwipeContainer = ({ products, cartItems, setCartItems }) => {
           href="https://fonts.googleapis.com/css?family=Alatsi&display=swap"
           rel="stylesheet"
         />
-        <h1 class="text-6xl mb-8">Santa Swiper</h1>
+       
         <div className="cardContainer flex justify-center max-w-xs rounded-lg bg-[#333]">
           {products.map((character, index) => (
             <TinderCard

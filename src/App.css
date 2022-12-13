@@ -4,7 +4,7 @@
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   /* background: linear-gradient(#fff, #999); */
 
 }
@@ -21,7 +21,7 @@
 }
 
 .app {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .app>div {

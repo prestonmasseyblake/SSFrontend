@@ -6,7 +6,12 @@ import Login from './pages/Login';
 import Cart from './pages/Cart';
 import About from "./pages/About"
 const App = () => {
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([]);
+  useEffect(() => {
+  
+    
+  }, [cartItems])
+ 
   console.log(cartItems)
   return (
     <>
