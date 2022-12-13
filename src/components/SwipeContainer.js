@@ -1,22 +1,17 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import TinderCard from "react-tinder-card";
-import "./SwipeContainer.css"
+import "./SwipeContainer.css";
 
 function parseCategories(categoryText) {
-  let arr = []
-  for (let i = 0; i < categoryText.length; i++) {
-
-  }
+  let arr = [];
+  for (let i = 0; i < categoryText.length; i++) {}
 }
 
 const SwipeContainer = ({ products, cartItems, setCartItems }) => {
   const [currentIndex, setCurrentIndex] = useState(products.length - 1);
   const [lastDirection, setLastDirection] = useState();
 
-  useEffect(() => {
-    // console.log("products", products);
-    console.log(cartItems);
-  }, []);
+  useEffect(() => {}, []);
 
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex);
@@ -31,10 +26,10 @@ const SwipeContainer = ({ products, cartItems, setCartItems }) => {
 
   const swipedRight = (index) => {
     // setCartItems(["fwg"]);
-    setCartItems(cartItems.concat(products[index ]));
+    if (cartItems.findIndex((item) => item.name === products[index].name) < 0)
+      setCartItems(cartItems.concat(products[index]));
     // console.log("cartItems ... ", cartItems)
-    console.log("cccc ",products[index ]);
-  }
+  };
 
   const updateCurrentIndex = (val) => {
     setCurrentIndex(val);
@@ -49,9 +44,8 @@ const SwipeContainer = ({ products, cartItems, setCartItems }) => {
   const swiped = (direction, nameToDelete, index) => {
     setLastDirection(direction);
     updateCurrentIndex(index - 1);
-    console.log("direction ", direction)
     if (direction === "right") {
-      swipedRight(index)
+      swipedRight(index);
     }
   };
 

@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
-import SnowBackground from '../components/snowBackground'
-import SwipeContainer from '../components/SwipeContainer'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import SnowBackground from "../components/snowBackground";
+import SwipeContainer from "../components/SwipeContainer";
+import axios from "axios";
 import { Product } from "../utils/Product";
 import { items } from "../utils/items";
-import Navbar from '../components/navbar';
-import LowerCart from '../components/LowerCart';
+import Navbar from "../components/navbar";
+import LowerCart from "../components/LowerCart";
 const Home = ({ cartItems, setCartItems }) => {
   useEffect(() => {
-  console.log("fwf", cartItems);   
-  },[])
- 
+    console.log("fwf", cartItems);
+  }, []);
+
   // console.log("items: ",items)
   // const [products, setProducts] = useState()
 
@@ -18,7 +18,7 @@ const Home = ({ cartItems, setCartItems }) => {
     let arr = [];
     for (let i = 0; i < items.length; i++) {
       // console.log(items[i]);
-      let temp = new Product(
+      let temp = Product(
         items[i].productNameEn,
         items[i].sellPrice,
         items[i].categoryName,
@@ -32,10 +32,7 @@ const Home = ({ cartItems, setCartItems }) => {
 
   const products = createItems(items);
 
-  useEffect(() => {
-  
-  }, []);
- 
+  useEffect(() => {}, [cartItems]);
 
   return (
     <div>
@@ -51,4 +48,4 @@ const Home = ({ cartItems, setCartItems }) => {
   );
 };
 
-export default Home
+export default Home;
