@@ -16,18 +16,13 @@ const App = () => {
         },
       })
       .then((res) => {
-        localStorage.setItem(res.data.username, JSON.stringify(cartItems));
+        // localStorage.setItem(res.data.username, JSON.stringify(cartItems));
         localStorage.setItem("profile", res.data.username);
       })
       .catch((err) => err);
   }, []);
 
-  useEffect(() => {
-    const username = localStorage.getItem("profile");
-    if (username) {
-      localStorage.setItem(username, JSON.stringify(cartItems));
-    }
-  }, [cartItems]);
+  useEffect(() => {}, [cartItems]);
   return (
     <>
       <BrowserRouter>
