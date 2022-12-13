@@ -28,7 +28,7 @@ function Login() {
     };
     setLoading(true);
     axios
-      .post(`${url}/login`, { body }, { headers })
+      .post(`${url}/login`, body, { headers })
       .then((response) => {
         const { token } = response.data;
         localStorage.setItem("token", token);
