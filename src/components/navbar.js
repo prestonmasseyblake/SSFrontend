@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-function Navbar() {
+function Navbar({}) {
   return (
     <nav
       className=" px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 
