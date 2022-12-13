@@ -19,8 +19,8 @@ function Login() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const body = {
-      email: username,
-      password: password,
+      username,
+      password,
     };
     const headers = {
       // Authorization: "Bearer my-token",
