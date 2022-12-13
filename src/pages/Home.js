@@ -7,10 +7,6 @@ import { items } from "../utils/items";
 import Navbar from "../components/navbar";
 import LowerCart from "../components/LowerCart";
 const Home = ({ cartItems, setCartItems }) => {
-  useEffect(() => {
-    console.log("fwf", cartItems);
-  }, []);
-
   // console.log("items: ",items)
   // const [products, setProducts] = useState()
 
