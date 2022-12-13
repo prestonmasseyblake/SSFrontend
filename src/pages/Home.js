@@ -33,20 +33,9 @@ const Home = ({ cartItems, setCartItems }) => {
   const products = createItems(items);
 
   useEffect(() => {
-    //     const headers = {
-    //         "Content-Type": "application/json",
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Methods" : "GET,POST,HEAD,DELETE,PUT,OPTIONS",
-    //       "CJ-Access-Token": "bfbfd53c0dbd45d2ae8ee93212b99506",
-    //     };
-    //   axios
-    //     .get("https://developers.cjdropshipping.com/", { headers })
-    //     .then((response) =>
-    //         console.log(response)
-    //     .catch((err) => console.log("this is error",err))
-    //     )
+  
   }, []);
-  // createItems(items);
+ 
 
   return (
     <div>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from "../components/navbar";
+import { Link } from "react-router-dom";
 // const { WebDriver } = require("selenium-webdriver");
 // var webdriver = require("selenium-webdriver");
 // import webdriver from "selenium-webdriver";
@@ -7,19 +8,26 @@ import Navbar from "../components/navbar";
 
 // Create a new instance of the Chrome driver
 
-const Cart = ({cartItems, setCartItems}) => {
+const Cart = ({ cartItems, setCartItems }) => {
+  useEffect(() => {
 
-
+  },[cartItems, setCartItems])
+  function removeItem(index) {
+    console.log("indexer", index);
+    let temp_arr =cartItems;
+    temp_arr.splice(index, 1)
+    console.log(temp_arr)
+    setCartItems(temp_arr)
+  }
     
-    const handlePurchase = async() => {
-        // const driver = new WebDriver("chrome");
-
-        // Navigate to a page
-        // await driver.get("https://example.com");
-       
-    }
-
     
+
+  const renderHref = (title) => {
+    let amazonUrl =
+      "https://www.amazon.com/s?k=";
+    title = title.split(" ").join("+")
+    return amazonUrl + title;
+  }
 
     return (
       <>
@@ -35,26 +43,45 @@ const Cart = ({cartItems, setCartItems}) => {
               </tr>
             </thead>
             <tbody>
-              {cartItems.map((item, index) => (
-                <tr>
-                  <td>
-                          <img src={item.image} alt="" className="w-16" />
-                  </td>
+              {cartItems.length > 0 ? (
+                <>
+                  {cartItems.map((item, index) => (
+                    <tr>
+                      <td>
+                        <img src={item.image} alt="" className="w-16" />
+                      </td>
                       <td>{item.name}</td>
                       <td>{item.price}</td>
+                      
                       <td className="mx-2">
-                      <button className="bg-red-400 p-2">Remove</button>
+                        <div onClick={() => { removeItem(index) }}>
+                          <button className="bg-red-400 p-2">Remove</button>
+                        </div>
                       </td>
-                  <td className="p-4">
-                    <button
-                      className="bg-[#000] text-white p-2 rounded-sm"
-                      onClick={handlePurchase()}
-                    >
-                      Purchase
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                      <td className="p-4">
+                        <a href={renderHref(item.name)} target="_blank">
+                          <button className="bg-[#000] text-white p-2 rounded-sm">
+                            Purchase
+                          </button>
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <div className="flex justify-center flex-col items-center">
+                    <p className="p-4 text-center">
+                      No items in cart add a product from the product page
+                    </p>
+                    <Link to="/swipe">
+                      <button className="bg-[#000] p-2 rounded-md text-white">
+                        Products
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
             </tbody>
           </table>
         </div>

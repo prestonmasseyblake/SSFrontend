@@ -32,11 +32,10 @@ function Login() {
               .then((response) => (
                 console.log(response)
               ));
-
-    
-
         // console.log(email, password);
-      };
+    };
+  
+  
     return (
       <div className="w-full h-full login-page">
         <div className="h-screen flex bg-gray-bg1">

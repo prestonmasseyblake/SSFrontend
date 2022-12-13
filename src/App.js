@@ -10,19 +10,13 @@ const App = () => {
   console.log(cartItems)
   return (
     <>
-      {/* <Login /> */}
-      {/* <Home /> */}
       <BrowserRouter>
         <Routes>
           <Route
             path="/cart"
-            element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
-          />
+            element={<Cart cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route path="/" element={<Login />} />
-          <Route
-            path="/swipe"
-            element={<Home cartItems={cartItems} setCartItems={setCartItems} />}
-          />
+          <Route path="/swipe" element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
