@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import About from "./pages/About";
 import axios from "axios";
+import Signup from "./pages/Signup";
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
@@ -32,6 +33,7 @@ const App = () => {
             element={<Cart cartItems={cartItems} setCartItems={setCartItems} />}
           />
           <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route
             path="/swipe"
             element={<Home cartItems={cartItems} setCartItems={setCartItems} />}
